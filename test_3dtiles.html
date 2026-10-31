@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Google Photorealistic 3D Tiles Test</title>
+<script src="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Cesium.js"></script>
+<link href="https://cesium.com/downloads/cesiumjs/releases/1.115/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+<style>
+  html, body, #cesiumContainer { width: 100%; height: 100%; margin: 0; padding: 0; overflow: hidden; background: #000; }
+  #status { position: absolute; top: 15px; left: 15px; z-index: 99; background: rgba(10,15,30,0.9); color: #fff; padding: 12px 18px; border-radius: 8px; font-family: sans-serif; font-size: 13px; border: 1px solid #38bdf8; max-width: 400px; }
+</style>
+</head>
+<body>
+<div id="status">
+  <b style="color:#38bdf8">Google Photorealistic 3D Tiles</b><br>
+  Target: Royapuram, Chennai (13.1040, 80.2937)<br>
+  <span id="log" style="color:#fcd34d">Loading 3D Tileset...</span>
+</div>
+<div id="cesiumContainer"></div>
+<script>
+const apiKey = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks";
+
+async function init() {
+  try {
+    const viewer = new Cesium.Viewer("cesiumContainer", {
+      globe: false,
+      baseLayerPicker: false,
+      geocoder: false,
+      animation: false,
+      timeline: false,
+      fullscreenButton: false,
+      infoBox: false,
+    });
+
+    document.getElementById("log").textContent = "Connecting to Google Map Tiles API...";
+
+    const tileset = await Cesium.createGooglePhotorealistic3DTileset({
+      key: apiKey,
+    });
+    viewer.scene.primitives.add(tileset);
+
+    // Fly to Royapuram, Chennai
+    viewer.camera.flyTo({
+      destination: Cesium.Cartesian3.fromDegrees(80.2937, 13.1040, 600),
+      orientation: {
+        heading: Cesium.Math.toRadians(0),
+        pitch: Cesium.Math.toRadians(-35),
+        roll: 0.0
+      },
+      duration: 2
+    });
+
+    document.getElementById("log").innerHTML = "<span style='color:#10b981'>✔ 3D Tiles Loaded! Photorealistic Mesh Active</span>";
+  } catch (err) {
+    console.error(err);
+    document.getElementById("log").innerHTML = 
+      "<span style='color:#f87171'><b>API Blocked (403):</b><br>Please enable 'Map Tiles API' in project agentkey-512119 or remove API restrictions on the key.</span>";
+  }
+}
+
+init();
+</script>
+</body>
+</html>

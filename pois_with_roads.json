@@ -1,0 +1,162 @@
+[
+  {
+    "id": "poi_station",
+    "name": "Royapuram Railway Station",
+    "lat": 13.1068,
+    "lng": 80.2922,
+    "icon": "🚂",
+    "color": "#f59e0b",
+    "defaultVeh": 90,
+    "nearest_roads": [
+      770,
+      735,
+      733,
+      578,
+      577
+    ]
+  },
+  {
+    "id": "poi_harbour",
+    "name": "Kasimedu Fishing Harbour",
+    "lat": 13.114,
+    "lng": 80.2982,
+    "icon": "🐟",
+    "color": "#0284c7",
+    "defaultVeh": 130,
+    "nearest_roads": [
+      344,
+      301,
+      732,
+      302,
+      287
+    ]
+  },
+  {
+    "id": "poi_metro",
+    "name": "Mannadi Metro Station",
+    "lat": 13.0945,
+    "lng": 80.2902,
+    "icon": "🚇",
+    "color": "#06b6d4",
+    "defaultVeh": 150,
+    "nearest_roads": [
+      530,
+      650,
+      535,
+      546,
+      529
+    ]
+  },
+  {
+    "id": "poi_stanley",
+    "name": "Stanley Medical College & Hospital",
+    "lat": 13.099,
+    "lng": 80.2875,
+    "icon": "🏥",
+    "color": "#10b981",
+    "defaultVeh": 100,
+    "nearest_roads": [
+      52,
+      53,
+      139,
+      125,
+      54
+    ]
+  },
+  {
+    "id": "poi_amman",
+    "name": "Arulmigu Angalaparameshwari Temple",
+    "lat": 13.1082,
+    "lng": 80.291,
+    "icon": "🛕",
+    "color": "#eab308",
+    "defaultVeh": 65,
+    "nearest_roads": [
+      6,
+      18,
+      347,
+      15,
+      104
+    ]
+  },
+  {
+    "id": "poi_subramania",
+    "name": "Subramania Swamy Temple",
+    "lat": 13.1042,
+    "lng": 80.2928,
+    "icon": "🛕",
+    "color": "#facc15",
+    "defaultVeh": 50,
+    "nearest_roads": [
+      4,
+      333,
+      330,
+      504,
+      749
+    ]
+  },
+  {
+    "id": "poi_stpeters",
+    "name": "St. Peter’s Church",
+    "lat": 13.103,
+    "lng": 80.2942,
+    "icon": "⛪",
+    "color": "#818cf8",
+    "defaultVeh": 40,
+    "nearest_roads": [
+      2,
+      505,
+      734,
+      3,
+      115
+    ]
+  },
+  {
+    "id": "poi_stanthony",
+    "name": "St. Anthony’s Church",
+    "lat": 13.1028,
+    "lng": 80.2938,
+    "icon": "⛪",
+    "color": "#a78bfa",
+    "defaultVeh": 35,
+    "nearest_roads": [
+      2,
+      505,
+      3,
+      734,
+      441
+    ]
+  },
+  {
+    "id": "poi_theagaraya",
+    "name": "Sir Theagaraya College",
+    "lat": 13.101,
+    "lng": 80.2878,
+    "icon": "🎓",
+    "color": "#14b8a6",
+    "defaultVeh": 45,
+    "nearest_roads": [
+      716,
+      120,
+      677,
+      126,
+      487
+    ]
+  },
+  {
+    "id": "poi_fire_temple",
+    "name": "Parsi Fire Temple (Agiary)",
+    "lat": 13.1035,
+    "lng": 80.2936,
+    "icon": "🔥",
+    "color": "#f97316",
+    "defaultVeh": 25,
+    "nearest_roads": [
+      2,
+      505,
+      3,
+      441,
+      665
+    ]
+  }
+]
