@@ -8,6 +8,6 @@ with open('c:/Users/SAAQIB/areatwin/all_pois.json', 'r', encoding='utf-8') as f:
 
 roads_json = json.dumps(roads_data, separators=(',', ':'), ensure_ascii=False)
 pois_json = json.dumps(pois_data, separators=(',', ':'), ensure_ascii=False)
-apiKey = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks"
+apiKey = "YOUR_GOOGLE_MAPS_API_KEY"
 
 print(f"Loaded {len(roads_data)} roads and {len(pois_data)} POIs.")

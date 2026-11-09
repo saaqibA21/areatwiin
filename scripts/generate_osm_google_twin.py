@@ -1,6 +1,6 @@
 import json
 
-apiKey = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks"
+apiKey = "YOUR_GOOGLE_MAPS_API_KEY"
 
 # Load the real OSM roads graph
 with open('c:/Users/SAAQIB/areatwin/roads_graph.json', 'r', encoding='utf-8') as f:
@@ -192,7 +192,7 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
 // ==========================================
 // 1. DATA INITIALIZATION (848 REAL ROADS)
 // ==========================================
-const apiKey = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks";
+const apiKey = "YOUR_GOOGLE_MAPS_API_KEY";
 const roads = {roads_json};
 const pois = {pois_json};
 

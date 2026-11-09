@@ -2,7 +2,7 @@ import urllib.request
 import json
 import time
 
-key = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks"
+key = "YOUR_GOOGLE_MAPS_API_KEY"
 url = f"https://tile.googleapis.com/v1/3dtiles/root.json?key={key}"
 
 print("Testing Map Tiles API with key...")

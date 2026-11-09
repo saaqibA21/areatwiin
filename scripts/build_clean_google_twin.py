@@ -1,6 +1,6 @@
 import json
 
-with open("c:/Users/SAAQIB/areatwin/royapuram_roads.json", "r", encoding="utf-8") as f:
+with open("c:/Users/SAAQIB/areatwin/accurate_roads.json", "r", encoding="utf-8") as f:
     roads_data = json.load(f)
 
 roads_json_str = json.dumps(roads_data, ensure_ascii=False)
@@ -10,7 +10,7 @@ html_code = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Royapuram Google Maps 3D Digital Twin</title>
+<title>Royapuram Google Maps Digital Twin - Clean Realistic Roads</title>
 <style>
 *{{margin:0;padding:0;box-sizing:border-box}}
 body{{font-family:'Segoe UI',system-ui,sans-serif;background:#050914;color:#f1f5f9;overflow:hidden;height:100vh}}
@@ -81,7 +81,10 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
 <div id="map-container">
   <div id="hud">
     <h1>🏙️ Royapuram Digital Twin <span class="tag">Google Maps Satellite 3D</span></h1>
-    <div id="time-disp">🕐 08:00 AM</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="index.html" class="btn" style="text-decoration:none;display:inline-block">🏙️ Switch to 3D Three.js Twin</a>
+      <div id="time-disp">🕐 08:00 AM</div>
+    </div>
   </div>
   <canvas id="rain-canvas"></canvas>
   <div id="map"></div>
@@ -103,6 +106,9 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
         <button class="btn active" id="btn-sat" onclick="setMapType('hybrid')">🛰️ Satellite</button>
         <button class="btn" id="btn-road" onclick="setMapType('roadmap')">🗺️ Roads</button>
       </div>
+    </div>
+    <div class="ctrl"><label>Show Road Track Lines</label>
+      <label class="toggle"><input type="checkbox" id="road-lines-tog" checked onchange="toggleRoadLines(this.checked)"><span class="sl"></span></label>
     </div>
     <div class="ctrl"><label>Google Live Traffic Layer</label>
       <label class="toggle"><input type="checkbox" id="traffic-tog" onchange="toggleGoogleTraffic(this.checked)"><span class="sl"></span></label>
@@ -139,7 +145,7 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
   <!-- Target Destination Traffic Allocator -->
   <div class="panel">
     <h3><span>🎯</span> Destination Traffic Allocator</h3>
-    <p style="font-size:10px;color:#94a3b8;margin-bottom:8px">Change vehicles sent to each landmark — watch live route pathfinding on all 30 roads:</p>
+    <p style="font-size:10px;color:#94a3b8;margin-bottom:8px">Change vehicles sent to each landmark — watch live route pathfinding along real streets:</p>
     <div class="list-box" id="dest-sliders"></div>
   </div>
 
@@ -170,7 +176,7 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
 
   <!-- Road Traffic & Congestion -->
   <div class="panel">
-    <h3><span>🛣️</span> 30-Road Network Status</h3>
+    <h3><span>🛣️</span> Real Streets Status</h3>
     <div class="list-box" id="road-list" style="max-height:160px"></div>
     <div class="cbar"><div class="cfill" id="cfill" style="width:30%;background:#10b981"></div></div>
   </div>
@@ -189,42 +195,39 @@ input[type=range]{{width:100%;accent-color:#38bdf8;margin:3px 0}}
 // ==========================================
 // 1. DATA INITIALIZATION
 // ==========================================
-const apiKey = "AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks";
+const apiKey = "YOUR_GOOGLE_MAPS_API_KEY";
 const roads = {roads_json_str};
 
+// Landmark coordinates verified against real Google Maps Satellite locations
 const pois = [
-  {{id:'poi_station', name:'Royapuram Railway Station', lat:13.1065, lng:80.2920, icon:'🚂', color:'#f59e0b', defaultVeh:90}},
-  {{id:'poi_harbour', name:'Kasimedu Fishing Harbour', lat:13.1115, lng:80.2965, icon:'🐟', color:'#0284c7', defaultVeh:130}},
-  {{id:'poi_metro', name:'Mannadi Metro Station', lat:13.0960, lng:80.2850, icon:'🚇', color:'#06b6d4', defaultVeh:150}},
-  {{id:'poi_stanley', name:'Stanley Medical College & Hospital', lat:13.0995, lng:80.2870, icon:'🏥', color:'#10b981', defaultVeh:100}},
-  {{id:'poi_amman', name:'Arulmigu Angalaparameshwari Temple', lat:13.1055, lng:80.2910, icon:'🛕', color:'#eab308', defaultVeh:65}},
-  {{id:'poi_subramania', name:'Subramania Swamy Temple', lat:13.1038, lng:80.2925, icon:'🛕', color:'#facc15', defaultVeh:50}},
-  {{id:'poi_stpeters', name:'St. Peter’s Church', lat:13.1030, lng:80.2945, icon:'⛪', color:'#818cf8', defaultVeh:40}},
-  {{id:'poi_stanthony', name:'St. Anthony’s Church', lat:13.1028, lng:80.2940, icon:'⛪', color:'#a78bfa', defaultVeh:35}},
-  {{id:'poi_theagaraya', name:'Sir Theagaraya College', lat:13.1010, lng:80.2880, icon:'🎓', color:'#14b8a6', defaultVeh:45}},
-  {{id:'poi_fire_temple', name:'Parsi Fire Temple (Agiary)', lat:13.1045, lng:80.2935, icon:'🔥', color:'#f97316', defaultVeh:25}}
+  {{id:'poi_station', name:'Royapuram Railway Station', lat:13.1068, lng:80.2922, icon:'🚂', color:'#f59e0b', defaultVeh:90}},
+  {{id:'poi_harbour', name:'Kasimedu Fishing Harbour', lat:13.1140, lng:80.2982, icon:'🐟', color:'#0284c7', defaultVeh:130}},
+  {{id:'poi_metro', name:'Mannadi Metro Station', lat:13.0945, lng:80.2902, icon:'🚇', color:'#06b6d4', defaultVeh:150}},
+  {{id:'poi_stanley', name:'Stanley Medical College & Hospital', lat:13.0990, lng:80.2875, icon:'🏥', color:'#10b981', defaultVeh:100}},
+  {{id:'poi_amman', name:'Arulmigu Angalaparameshwari Temple', lat:13.1082, lng:80.2910, icon:'🛕', color:'#eab308', defaultVeh:65}},
+  {{id:'poi_subramania', name:'Subramania Swamy Temple', lat:13.1042, lng:80.2928, icon:'🛕', color:'#facc15', defaultVeh:50}},
+  {{id:'poi_stpeters', name:'St. Peter’s Church', lat:13.1030, lng:80.2942, icon:'⛪', color:'#818cf8', defaultVeh:40}},
+  {{id:'poi_stanthony', name:'St. Anthony’s Church', lat:13.1028, lng:80.2938, icon:'⛪', color:'#a78bfa', defaultVeh:35}},
+  {{id:'poi_theagaraya', name:'Sir Theagaraya College', lat:13.1010, lng:80.2878, icon:'🎓', color:'#14b8a6', defaultVeh:45}},
+  {{id:'poi_fire_temple', name:'Parsi Fire Temple (Agiary)', lat:13.1035, lng:80.2936, icon:'🔥', color:'#f97316', defaultVeh:25}}
 ];
 
 const waterlogSpots = [
-  {{id:'wl_stanley',name:'Stanley Subway Underpass',lat:13.0995,lng:80.2872,baseDepth:65,radius:65,
-   desc:'Low-elevation rail underpass; chronic drainage blockage. Impassable in heavy rain.'}},
-  {{id:'wl_kalmandapam',name:'Kalmandapam Market Junction',lat:13.1060,lng:80.2952,baseDepth:45,radius:55,
-   desc:'Low basin pocket near residential bazaar; runoff accumulates from Surya Narayana Rd.'}},
-  {{id:'wl_pvkovil',name:'P.V. Kovil St Low Basin',lat:13.1044,lng:80.2878,baseDepth:40,radius:50,
-   desc:'Depression between residential blocks; stormwater drains overflow.'}},
-  {{id:'wl_madha',name:'West Madha Church / MS Koil Corner',lat:13.1052,lng:80.2922,baseDepth:32,radius:45,
-   desc:'High footfall commercial intersection; stormwater stalls due to tight road slope.'}},
-  {{id:'wl_harbour',name:'Kasimedu Harbour Gate Basin',lat:13.1110,lng:80.2965,baseDepth:28,radius:55,
-   desc:'Coastal backwater seepage and surface runoff from fish market sheds.'}},
-  {{id:'wl_rob',name:'Royapuram ROB Bridge Slope',lat:13.1065,lng:80.2905,baseDepth:25,radius:40,
-   desc:'Water collects at foot of Rail Overbridge ramp before reaching main line drain.'}}
+  {{id:'wl_stanley',name:'Stanley Subway Underpass',lat:13.0992,lng:80.2872,baseDepth:65,radius:50,
+   desc:'Depressed railway underpass; chronic drainage blockage. Impassable in heavy rain.'}},
+  {{id:'wl_bridge_descent',name:'Royapuram ROB Bridge Slope',lat:13.1034,lng:80.2936,baseDepth:35,radius:45,
+   desc:'Water collects at the foot of Royapuram bridge slope curve before joining Beach Rd.'}},
+  {{id:'wl_s_madha',name:'S. Madha Church St Dip',lat:13.1068,lng:80.2946,baseDepth:40,radius:40,
+   desc:'Low-lying residential basin near cemetery.'}},
+  {{id:'wl_harbour',name:'Kasimedu Wharf Gate Basin',lat:13.1128,lng:80.2982,baseDepth:30,radius:50,
+   desc:'Coastal runoff from fish auction sheds.'}}
 ];
 
-// State variables
 let map, trafficLayer;
 const roadPolylines = {{}};
 const blockedRoads = new Set();
 let blockMode = false;
+let showRoadLines = true;
 const reroutePolylines = [];
 const destVehTargets = {{}};
 const waterCircles = {{}};
@@ -233,10 +236,10 @@ let waterAccumulationLevel = 0;
 let simRunning = true, simSpeed = 1, timeOfDay = 8, rainOn = false, rainIntensity = 1;
 
 const vehConfigs = {{
-  car: {{speed: 0.00035, color:'#38bdf8', icon:'🚗', enabled:true}},
-  bike:{{speed: 0.00045, color:'#22c55e', icon:'🏍️', enabled:true}},
-  auto:{{speed: 0.00028, color:'#facc15', icon:'🛺', enabled:true}},
-  bus: {{speed: 0.00022, color:'#ef4444', icon:'🚌', enabled:true}}
+  car: {{speed: 0.00035, color:'#38bdf8', enabled:true}},
+  bike:{{speed: 0.00045, color:'#22c55e', enabled:true}},
+  auto:{{speed: 0.00028, color:'#facc15', enabled:true}},
+  bus: {{speed: 0.00022, color:'#ef4444', enabled:true}}
 }};
 let vehicles = [];
 
@@ -244,13 +247,13 @@ let vehicles = [];
 // 2. GOOGLE MAPS INITIALIZATION
 // ==========================================
 function initGoogleMap() {{
-  const royapuramCenter = {{ lat: 13.1040, lng: 80.2937 }};
+  const royapuramCenter = {{ lat: 13.1035, lng: 80.2935 }};
   map = new google.maps.Map(document.getElementById("map"), {{
     center: royapuramCenter,
-    zoom: 16,
+    zoom: 16.5,
     tilt: 45,
     heading: 0,
-    mapTypeId: "hybrid", // Satellite + Street Labels
+    mapTypeId: "hybrid",
     mapId: "DEMO_MAP_ID",
     disableDefaultUI: false,
     zoomControl: true,
@@ -260,38 +263,37 @@ function initGoogleMap() {{
 
   trafficLayer = new google.maps.TrafficLayer();
 
-  // Render 30 Roads on Google Maps
+  // Render Clean Street Centerlines (subtle, aligned strictly with pavement)
   renderRoads();
 
-  // Render 10 Famous Landmarks
+  // Render Distinct Landmarks
   renderLandmarks();
 
-  // Render Waterlog Puddles
+  // Render Water Puddles
   renderWaterPuddles();
 
-  // Init UI
+  // UI Setup
   initDestinationSliders();
   initRainCanvas();
   rebalanceVehicles();
   updateDashboard();
 
-  // Animation Loop
   requestAnimationFrame(animateSimulation);
 }}
 
 function renderRoads() {{
   roads.forEach(r => {{
     const path = r.pts.map(p => ({{ lat: p[0], lng: p[1] }}));
-    const color = r.type === 'highway' ? '#facc15' : r.type === 'arterial' ? '#38bdf8' : '#cbd5e1';
-    const weight = r.width >= 6 ? 6 : r.width >= 4 ? 4 : 3;
+    const color = r.type === 'highway' ? '#facc15' : r.type === 'arterial' ? '#38bdf8' : '#e2e8f0';
 
+    // Clean subtle road tracks strictly on real pavement
     const polyline = new google.maps.Polyline({{
       path,
       geodesic: true,
       strokeColor: color,
-      strokeOpacity: 0.85,
-      strokeWeight: weight,
-      map: map
+      strokeOpacity: 0.6,
+      strokeWeight: r.width >= 6 ? 5 : 3.5,
+      map: showRoadLines ? map : null
     }});
 
     polyline.roadData = r;
@@ -302,6 +304,13 @@ function renderRoads() {{
     }});
 
     roadPolylines[r.id] = polyline;
+  }});
+}}
+
+function toggleRoadLines(show) {{
+  showRoadLines = show;
+  Object.values(roadPolylines).forEach(p => {{
+    p.setMap(show ? map : null);
   }});
 }}
 
@@ -321,10 +330,9 @@ function renderLandmarks() {{
 
     const infoWindow = new google.maps.InfoWindow({{
       content: `
-        <div style="color:#000;font-family:sans-serif;padding:4px">
+        <div style="color:#000;font-family:sans-serif;padding:5px">
           <b style="font-size:13px">${{p.icon}} ${{p.name}}</b><br>
-          <span style="font-size:11px;color:#555">Daily Visitors: ${{p.defaultVeh * 50}}/day</span><br>
-          <span style="font-size:11px;color:#0284c7;font-weight:700">Target Inflow: ${{p.defaultVeh}} veh/hr</span>
+          <span style="font-size:11px;color:#0284c7;font-weight:700">Target Traffic: ${{p.defaultVeh}} veh/hr</span>
         </div>`
     }});
 
@@ -351,7 +359,7 @@ function renderWaterPuddles() {{
 }}
 
 // ==========================================
-// 3. VEHICLE SIMULATION ENGINE
+// 3. VEHICLE SIMULATION (ALIGNED TO REAL STREETS)
 // ==========================================
 function spawnVehicle(poiId) {{
   const poi = pois.find(p => p.id === poiId) || pois[0];
@@ -367,17 +375,18 @@ function spawnVehicle(poiId) {{
   const forward = Math.random() > 0.5;
   const path = forward ? [...road.pts] : [...road.pts].reverse();
 
-  // Create Google Maps Marker for vehicle
+  // Create clean vehicle symbol (no cluttering dots!)
   const marker = new google.maps.Marker({{
     position: {{ lat: path[0][0], lng: path[0][1] }},
     map: map,
     icon: {{
-      path: google.maps.SymbolPath.CIRCLE,
-      scale: type==='bus'?5:type==='car'?4:3,
+      path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+      scale: type==='bus'?4.5:type==='car'?3.8:type==='auto'?3.2:2.6,
       fillColor: cfg.color,
-      fillOpacity: 0.9,
+      fillOpacity: 0.95,
       strokeColor: "#ffffff",
-      strokeWeight: 1
+      strokeWeight: 1,
+      rotation: 0
     }}
   }});
 
@@ -396,7 +405,7 @@ function spawnVehicle(poiId) {{
 function rebalanceVehicles() {{
   let totalDesired = 0;
   pois.forEach(p => {{ totalDesired += destVehTargets[p.id] || 0; }});
-  const targetFleet = Math.max(20, Math.min(140, Math.round(totalDesired / 5.0)));
+  const targetFleet = Math.max(16, Math.min(100, Math.round(totalDesired / 6.0)));
 
   while(vehicles.length > targetFleet) {{
     const v = vehicles.pop();
@@ -421,12 +430,28 @@ function updateVehicles(dt) {{
 
   vehicles.forEach(v => {{
     if(v.segIdx >= v.path.length - 1) {{
-      // Pick next road
+      // Reached street end, pick connected real street
+      const lastPt = v.path[v.path.length - 1];
       const avail = roads.filter(r => !blockedRoads.has(r.id) && (v.type!=='bus' || r.busRoute));
       if(avail.length) {{
-        const nRoad = avail[Math.floor(Math.random()*avail.length)];
-        v.roadId = nRoad.id;
-        v.path = Math.random()>0.5 ? [...nRoad.pts] : [...nRoad.pts].reverse();
+        // Find street starting near lastPt
+        const candidates = [];
+        avail.forEach(r => {{
+          const d0 = Math.hypot(r.pts[0][0] - lastPt[0], r.pts[0][1] - lastPt[1]);
+          const dEnd = Math.hypot(r.pts[r.pts.length-1][0] - lastPt[0], r.pts[r.pts.length-1][1] - lastPt[1]);
+          if(d0 < 0.003) candidates.push({{ r, fwd: true }});
+          else if(dEnd < 0.003) candidates.push({{ r, fwd: false }});
+        }});
+
+        if(candidates.length) {{
+          const next = candidates[Math.floor(Math.random()*candidates.length)];
+          v.roadId = next.r.id;
+          v.path = next.fwd ? [...next.r.pts] : [...next.r.pts].reverse();
+        }} else {{
+          const nRoad = avail[Math.floor(Math.random()*avail.length)];
+          v.roadId = nRoad.id;
+          v.path = Math.random()>0.5 ? [...nRoad.pts] : [...nRoad.pts].reverse();
+        }}
         v.segIdx = 0;
         v.prog = 0;
       }}
@@ -449,6 +474,14 @@ function updateVehicles(dt) {{
       const curLat = p1[0] + dLat * v.prog;
       const curLng = p1[1] + dLng * v.prog;
       v.marker.setPosition({{ lat: curLat, lng: curLng }});
+
+      // Heading orientation for arrow icon
+      const heading = (Math.atan2(dLng, dLat) * 180 / Math.PI + 360) % 360;
+      const icon = v.marker.getIcon();
+      if(icon) {{
+        icon.rotation = heading;
+        v.marker.setIcon(icon);
+      }}
     }}
   }});
 }}
@@ -509,7 +542,7 @@ function updateWaterPuddles() {{
     const circle = waterCircles[s.id];
     if(circle) {{
       circle.setOptions({{
-        fillOpacity: Math.min(0.7, waterAccumulationLevel * 0.65),
+        fillOpacity: Math.min(0.65, waterAccumulationLevel * 0.6),
         radius: s.radius * (0.6 + waterAccumulationLevel * 0.5)
       }});
     }}
@@ -564,11 +597,12 @@ function blockRoad(roadId) {{
     poly.setOptions({{
       strokeColor: "#ef4444",
       strokeOpacity: 0.95,
-      strokeWeight: 8
+      strokeWeight: 7,
+      map: map
     }});
   }}
 
-  // Redirect vehicles
+  // Redirect vehicles traversing this road
   vehicles.forEach(v => {{
     if(v.roadId === roadId) {{
       const avail = roads.filter(r => !blockedRoads.has(r.id) && (v.type!=='bus' || r.busRoute));
@@ -587,11 +621,12 @@ function unblockRoad(roadId) {{
   const poly = roadPolylines[roadId];
   const r = roads.find(x => x.id === roadId);
   if(poly && r) {{
-    const color = r.type === 'highway' ? '#facc15' : r.type === 'arterial' ? '#38bdf8' : '#cbd5e1';
+    const color = r.type === 'highway' ? '#facc15' : r.type === 'arterial' ? '#38bdf8' : '#e2e8f0';
     poly.setOptions({{
       strokeColor: color,
-      strokeOpacity: 0.85,
-      strokeWeight: r.width >= 6 ? 6 : r.width >= 4 ? 4 : 3
+      strokeOpacity: 0.6,
+      strokeWeight: r.width >= 6 ? 5 : 3.5,
+      map: showRoadLines ? map : null
     }});
   }}
 }}
@@ -637,13 +672,12 @@ function updateReroutingReport() {{
         const newLoadPct = Math.min(100, a.traffic + Math.round(addedLoad * 100 / a.capacity));
         html += `<span style="color:#2dd4bf">⤷ ${{a.name}}</span> <span style="color:#fcd34d">(+${{addedLoad}} veh/hr, ${{newLoadPct}}% load)</span><br>`;
 
-        // Draw Orange Reroute Glow on Google Maps
         const rPath = a.pts.map(p => ({{ lat: p[0], lng: p[1] }}));
         const glowPoly = new google.maps.Polyline({{
           path: rPath,
           strokeColor: "#f97316",
-          strokeOpacity: 0.8,
-          strokeWeight: 7,
+          strokeOpacity: 0.85,
+          strokeWeight: 6,
           map: map
         }});
         reroutePolylines.push(glowPoly);
@@ -776,7 +810,7 @@ function updateDashboard() {{
   document.getElementById('time-disp').textContent = `🕐 ${{String(hr12).padStart(2,'0')}}:00 ${{timeOfDay>=12?'PM':'AM'}}`;
 
   let rhtml = '';
-  roads.slice(0, 12).forEach(r => {{
+  roads.slice(0, 10).forEach(r => {{
     const blk = blockedRoads.has(r.id);
     rhtml += `
       <div style="display:flex;justify-content:space-between;padding:4px 8px;background:#0e172e;border-radius:4px;margin-bottom:3px;font-size:10.5px;${{blk?'opacity:0.4;text-decoration:line-through':''}}">
@@ -804,7 +838,7 @@ window.addEventListener('resize', () => {{
   if(rainOn) initRainCanvas();
 }});
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBFzf4K4xzSL2bgBoGUgFUfHY6DxFwa7Ks&v=beta&callback=initGoogleMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&v=beta&callback=initGoogleMap"></script>
 </body>
 </html>
 '''
@@ -812,4 +846,4 @@ window.addEventListener('resize', () => {{
 with open("c:/Users/SAAQIB/areatwin/google_maps_twin.html", "w", encoding="utf-8") as f:
     f.write(html_code)
 
-print("Generated google_maps_twin.html successfully! Bytes:", len(html_code))
+print("Generated clean google_maps_twin.html successfully!")

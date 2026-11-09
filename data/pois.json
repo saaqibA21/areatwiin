@@ -1,0 +1,524 @@
+[
+ {
+  "id": "kovil_angala",
+  "name": "Arulmigu Angalaparameshwari Amman Temple",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.1082,
+  "lng": 80.291,
+  "defaultVisitors": 650,
+  "desc": "Famous Royapuram temple with major Friday & festival footfall.",
+  "nearest_roads": [
+   6,
+   18,
+   347,
+   15,
+   104,
+   502
+  ]
+ },
+ {
+  "id": "kovil_subramania",
+  "name": "Arulmigu Subramania Swamy Temple",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.1042,
+  "lng": 80.2928,
+  "defaultVisitors": 480,
+  "desc": "Historic temple on Surya Narayana Salai.",
+  "nearest_roads": [
+   4,
+   333,
+   330,
+   504,
+   749,
+   770
+  ]
+ },
+ {
+  "id": "kovil_salai_vinayagar",
+  "name": "Salai Vinayagar Koil",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.1018,
+  "lng": 80.2895,
+  "defaultVisitors": 380,
+  "desc": "Prominent neighborhood temple on Salai Vinayagar Koil St.",
+  "nearest_roads": [
+   674,
+   109,
+   121,
+   811,
+   812,
+   124
+  ]
+ },
+ {
+  "id": "kovil_kaligambal",
+  "name": "Arulmigu Kaligambal Temple",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.0935,
+  "lng": 80.2912,
+  "defaultVisitors": 850,
+  "desc": "Historic George Town temple visited by Chhatrapati Shivaji in 1677.",
+  "nearest_roads": [
+   532,
+   548,
+   547,
+   535,
+   546,
+   841
+  ]
+ },
+ {
+  "id": "kovil_kachaleeswarar",
+  "name": "Kachaleeswarar Temple",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.097,
+  "lng": 80.2882,
+  "defaultVisitors": 420,
+  "desc": "18th-century Shiva temple in Armenian Street neighborhood.",
+  "nearest_roads": [
+   135,
+   134,
+   138,
+   36,
+   122,
+   136
+  ]
+ },
+ {
+  "id": "kovil_selvavinayagar",
+  "name": "Sri Selvavinayagar Koil",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.1055,
+  "lng": 80.294,
+  "defaultVisitors": 320,
+  "desc": "Popular Ganesha kovil near Kalmandapam.",
+  "nearest_roads": [
+   13,
+   504,
+   330,
+   331,
+   12,
+   342
+  ]
+ },
+ {
+  "id": "kovil_venugopala",
+  "name": "Sri Venugopalaswamy Temple",
+  "category": "kovil",
+  "icon": "🛕",
+  "lat": 13.0995,
+  "lng": 80.289,
+  "defaultVisitors": 350,
+  "desc": "Traditional Vaishnavite shrine in North Chennai.",
+  "nearest_roads": [
+   132,
+   138,
+   30,
+   124,
+   135,
+   352
+  ]
+ },
+ {
+  "id": "hotel_buhari",
+  "name": "Buhari Hotel (Royapuram)",
+  "category": "hotel",
+  "icon": "🍽️",
+  "lat": 13.1062,
+  "lng": 80.2918,
+  "defaultVisitors": 700,
+  "desc": "Iconic Chennai restaurant famous for biryani and Chicken 65.",
+  "nearest_roads": [
+   770,
+   410,
+   330,
+   502,
+   332,
+   347
+  ]
+ },
+ {
+  "id": "hotel_seashell",
+  "name": "Hotel Sea Shell (Beach Road)",
+  "category": "hotel",
+  "icon": "🦞",
+  "lat": 13.111,
+  "lng": 80.2972,
+  "defaultVisitors": 550,
+  "desc": "Popular multi-cuisine & fresh seafood dining destination.",
+  "nearest_roads": [
+   440,
+   745,
+   340,
+   288,
+   343,
+   569
+  ]
+ },
+ {
+  "id": "hotel_sangeetha",
+  "name": "Sangeetha Veg Restaurant (Mannadi)",
+  "category": "hotel",
+  "icon": "☕",
+  "lat": 13.095,
+  "lng": 80.2905,
+  "defaultVisitors": 620,
+  "desc": "High footfall pure vegetarian restaurant & filter coffee hub.",
+  "nearest_roads": [
+   530,
+   650,
+   535,
+   129,
+   131,
+   532
+  ]
+ },
+ {
+  "id": "hotel_saravana",
+  "name": "Hotel Saravana Bhavan (Parrys)",
+  "category": "hotel",
+  "icon": "🍛",
+  "lat": 13.093,
+  "lng": 80.2918,
+  "defaultVisitors": 780,
+  "desc": "Major south Indian dining spot near High Court / Beach Rd.",
+  "nearest_roads": [
+   841,
+   846,
+   547,
+   532,
+   548,
+   623
+  ]
+ },
+ {
+  "id": "hotel_vinayaga_tea",
+  "name": "Sri Vinayaga Tea & Cool Bar",
+  "category": "hotel",
+  "icon": "🍵",
+  "lat": 13.1022,
+  "lng": 80.2898,
+  "defaultVisitors": 340,
+  "desc": "Bustling local chai & snack spot on Salai Vinayagar Koil St.",
+  "nearest_roads": [
+   128,
+   811,
+   674,
+   109,
+   121,
+   812
+  ]
+ },
+ {
+  "id": "hotel_national",
+  "name": "National Lodge & Residency",
+  "category": "hotel",
+  "icon": "🏨",
+  "lat": 13.1005,
+  "lng": 80.2872,
+  "defaultVisitors": 260,
+  "desc": "Historic transit lodge on Maniakara Choultry Road.",
+  "nearest_roads": [
+   716,
+   682,
+   30,
+   139,
+   120,
+   487
+  ]
+ },
+ {
+  "id": "hotel_royal_sandwich",
+  "name": "Royal Sandwich & Snacks",
+  "category": "hotel",
+  "icon": "🥪",
+  "lat": 13.104,
+  "lng": 80.2925,
+  "defaultVisitors": 290,
+  "desc": "Youth evening food hotspot near Kalmandapam.",
+  "nearest_roads": [
+   4,
+   333,
+   334,
+   3,
+   660,
+   113
+  ]
+ },
+ {
+  "id": "metro_mannadi",
+  "name": "Mannadi Metro Station",
+  "category": "metro",
+  "icon": "🚇",
+  "lat": 13.0945,
+  "lng": 80.2902,
+  "defaultVisitors": 1800,
+  "desc": "Chennai Metro Blue Line underground station with dense commercial traffic.",
+  "nearest_roads": [
+   530,
+   650,
+   535,
+   546,
+   529,
+   548
+  ]
+ },
+ {
+  "id": "metro_washermanpet",
+  "name": "Washermanpet Metro Station",
+  "category": "metro",
+  "icon": "🚇",
+  "lat": 13.1065,
+  "lng": 80.2825,
+  "defaultVisitors": 2100,
+  "desc": "Major Blue Line interchange terminus and suburban transit node.",
+  "nearest_roads": [
+   639,
+   433,
+   495,
+   621,
+   497,
+   640
+  ]
+ },
+ {
+  "id": "metro_highcourt",
+  "name": "High Court Metro Station",
+  "category": "metro",
+  "icon": "🚇",
+  "lat": 13.091,
+  "lng": 80.2885,
+  "defaultVisitors": 2400,
+  "desc": "Key transit hub connecting George Town legal & commercial district.",
+  "nearest_roads": [
+   544,
+   762,
+   763,
+   764,
+   514,
+   515
+  ]
+ },
+ {
+  "id": "metro_theagaraya",
+  "name": "Sir Theagaraya College Metro",
+  "category": "metro",
+  "icon": "🚇",
+  "lat": 13.1015,
+  "lng": 80.2865,
+  "defaultVisitors": 1300,
+  "desc": "Subway stop serving colleges, hospitals, and residential wards.",
+  "nearest_roads": [
+   407,
+   682,
+   121,
+   716,
+   97,
+   351
+  ]
+ },
+ {
+  "id": "station_royapuram",
+  "name": "Royapuram Railway Station",
+  "category": "station",
+  "icon": "🚂",
+  "lat": 13.1068,
+  "lng": 80.2922,
+  "defaultVisitors": 1600,
+  "desc": "Historic 1856 terminus; active suburban EMU station serving 40,000 daily commuters.",
+  "nearest_roads": [
+   770,
+   735,
+   733,
+   578,
+   577,
+   738
+  ]
+ },
+ {
+  "id": "station_washermanpet",
+  "name": "Washermanpet Railway Station",
+  "category": "station",
+  "icon": "🚆",
+  "lat": 13.105,
+  "lng": 80.2818,
+  "defaultVisitors": 1400,
+  "desc": "Suburban rail junction linking north Chennai lines.",
+  "nearest_roads": [
+   327,
+   496,
+   499,
+   500,
+   497,
+   498
+  ]
+ },
+ {
+  "id": "station_beach",
+  "name": "Chennai Beach Junction",
+  "category": "station",
+  "icon": "🚉",
+  "lat": 13.094,
+  "lng": 80.2965,
+  "defaultVisitors": 3200,
+  "desc": "Crucial terminal for MRTS & suburban lines, port cargo yards.",
+  "nearest_roads": [
+   648,
+   557,
+   842,
+   844,
+   845,
+   103
+  ]
+ },
+ {
+  "id": "place_harbour",
+  "name": "Kasimedu Fishing Harbour",
+  "category": "place",
+  "icon": "🐟",
+  "lat": 13.114,
+  "lng": 80.2982,
+  "defaultVisitors": 2800,
+  "desc": "Asia's premier fishing harbour with massive 4 AM to 11 AM seafood auction traffic.",
+  "nearest_roads": [
+   344,
+   301,
+   732,
+   302,
+   287,
+   562
+  ]
+ },
+ {
+  "id": "place_stanley",
+  "name": "Stanley Medical College & Hospital",
+  "category": "place",
+  "icon": "🏥",
+  "lat": 13.099,
+  "lng": 80.2875,
+  "defaultVisitors": 2500,
+  "desc": "Centuries-old medical teaching hospital with continuous emergency & OPD influx.",
+  "nearest_roads": [
+   52,
+   53,
+   139,
+   125,
+   54,
+   682
+  ]
+ },
+ {
+  "id": "place_theagaraya",
+  "name": "Sir Theagaraya College",
+  "category": "place",
+  "icon": "🎓",
+  "lat": 13.101,
+  "lng": 80.2878,
+  "defaultVisitors": 950,
+  "desc": "Historic arts and science college campus.",
+  "nearest_roads": [
+   716,
+   120,
+   677,
+   126,
+   487,
+   121
+  ]
+ },
+ {
+  "id": "place_stpeters",
+  "name": "St. Peter's Church (Royapuram)",
+  "category": "place",
+  "icon": "⛪",
+  "lat": 13.103,
+  "lng": 80.2942,
+  "defaultVisitors": 450,
+  "desc": "Heritage Gothic church built in 1829.",
+  "nearest_roads": [
+   2,
+   505,
+   734,
+   3,
+   115,
+   441
+  ]
+ },
+ {
+  "id": "place_stanthony",
+  "name": "St. Anthony's Church",
+  "category": "place",
+  "icon": "⛪",
+  "lat": 13.1028,
+  "lng": 80.2938,
+  "defaultVisitors": 520,
+  "desc": "Prominent Catholic pilgrimage shrine with large Tuesday novena attendance.",
+  "nearest_roads": [
+   2,
+   505,
+   3,
+   734,
+   441,
+   665
+  ]
+ },
+ {
+  "id": "place_fire_temple",
+  "name": "Parsi Fire Temple (Agiary)",
+  "category": "place",
+  "icon": "🔥",
+  "lat": 13.1035,
+  "lng": 80.2936,
+  "defaultVisitors": 180,
+  "desc": "Built in 1910; Chennai's only Zoroastrian sacred flame temple.",
+  "nearest_roads": [
+   2,
+   505,
+   3,
+   441,
+   665,
+   734
+  ]
+ },
+ {
+  "id": "place_market",
+  "name": "Kalmandapam Market & Clock Tower",
+  "category": "place",
+  "icon": "🏪",
+  "lat": 13.1048,
+  "lng": 80.2918,
+  "defaultVisitors": 1200,
+  "desc": "Dense historic produce & meat marketplace.",
+  "nearest_roads": [
+   333,
+   4,
+   332,
+   330,
+   410,
+   770
+  ]
+ },
+ {
+  "id": "place_port_gate",
+  "name": "Chennai Port Trust Zero Gate",
+  "category": "place",
+  "icon": "⚓",
+  "lat": 13.1085,
+  "lng": 80.2975,
+  "defaultVisitors": 1100,
+  "desc": "Heavy commercial trailer and logistics freight access.",
+  "nearest_roads": [
+   341,
+   436,
+   286,
+   340,
+   440,
+   342
+  ]
+ }
+]

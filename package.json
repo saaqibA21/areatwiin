@@ -1,0 +1,12 @@
+{
+  "name": "areatwin",
+  "version": "2.0.0",
+  "description": "Live traffic digital twin of Royapuram, Chennai",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python serve.py",
+    "test": "node tests/logic.test.mjs"
+  },
+  "license": "MIT"
+}
